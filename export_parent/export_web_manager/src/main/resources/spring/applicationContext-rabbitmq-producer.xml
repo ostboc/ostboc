@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <!--1. 创建连接工厂-->
+    <rabbit:connection-factory
+        id="connectionFactory"
+        host="127.0.0.1"
+        port="5672"
+        virtual-host="/itcast"
+        username="ostboc"
+        password="123"/>
+
+    <!--2. 配置管理器-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--4. 配置队列名称-->
+    <rabbit:queue name="myQueue"/>
+
+    <!--5. 配置交换机-->
+    <rabbit:topic-exchange name="myExchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="myQueue" pattern="msg.#"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <!--7. 配置消息发送模板-->
+    <rabbit:template
+            id="rabbitTemplate"
+            exchange="myExchange" connection-factory="connectionFactory"
+            queue="myQueue"
+            message-converter="jsonMessageConverter"/>
+
+    <!--8. 消息转换器-->
+    <bean id="jsonMessageConverter"
+          class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter"/>
+</beans>
