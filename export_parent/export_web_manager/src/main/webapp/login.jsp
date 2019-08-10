@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>数据 - AdminLTE2定制版 | Log in</title>
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../plugins/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
-    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 </head>
 
 <script>
@@ -23,13 +23,13 @@
 </script>
 
 <body class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box" id="a">
     <div class="login-logo">
         <a href="all-admin-index.html">SaaS外贸出口云平台</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">登录系统</p>
+        <p class="login-box-msg">{{title}}</p>
         <form action="/login.do" method="post">
             <div class="form-group has-feedback">
                 <input type="email" name="email" class="form-control" placeholder="Email">
@@ -57,9 +57,17 @@
         </div>
     </div>
 </div>
-<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="../plugins/iCheck/icheck.min.js"></script>
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="plugins/js/axios-0.18.0.js"></script>
+<script src="plugins/js/vuejs-2.5.16.js"></script>
+<script>
+    var vue=new Vue({
+        el:"#a",
+        data:{title:"登录系统"}
+    })
+</script>
 <script>
     $(function() {
         $('input').iCheck({
